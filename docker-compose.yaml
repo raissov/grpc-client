@@ -1,0 +1,20 @@
+version: '3'
+services:
+  myapp:
+    container_name: client-sender
+    ports:
+      - 3001:3001
+    build:
+      context: ./
+      dockerfile: build/Dockerfile
+    restart: always
+    volumes:
+      - ./config/config.yaml:/app/config.yaml:ro
+    environment:
+      - APP_MODE=dev
+    networks:
+      - auth-serice_users-auth
+
+networks:
+  auth-serice_users-auth:
+    external: true
